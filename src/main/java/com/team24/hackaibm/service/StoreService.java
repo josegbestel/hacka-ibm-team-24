@@ -31,7 +31,11 @@ public class StoreService {
         Optional<Item> optItem = itemRepository.findByTitleAndSellerContact(newItem.getTitle(), newItem.getSeller().getContact());
 
         if(optItem.isPresent()){
-            NewItemRepresentationModel created = NewItemRepresentationModel.byDomain(optItem.get());
+            Item item = newItem.toDomain(optProduct.get());
+            item.setId(optItem.get().getId());
+            item = itemRepository.save(item);
+
+            NewItemRepresentationModel created = NewItemRepresentationModel.byDomain(item);
             return created;
         }
 

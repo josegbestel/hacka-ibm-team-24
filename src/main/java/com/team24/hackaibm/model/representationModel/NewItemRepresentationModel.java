@@ -6,6 +6,7 @@ import com.team24.hackaibm.utils.CustomDate;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class NewItemRepresentationModel implements Serializable {
 
@@ -80,7 +81,11 @@ public class NewItemRepresentationModel implements Serializable {
         domain.setAmount(this.amount);
         domain.setPrice(this.price);
         domain.setImage(this.image);
-        domain.setCreated(CustomDate.byLocalDate(LocalDate.now()).toString());
+
+        LocalDate localDate = LocalDate.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.LLL.yyyy");
+        String formattedString = localDate.format(formatter);
+        domain.setCreated(formattedString);
 
         domain.setSellerName(this.getSeller().getName());
         domain.setSellerLocation(this.getSeller().getLocation());
