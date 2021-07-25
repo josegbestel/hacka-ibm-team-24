@@ -20,7 +20,6 @@ public class StepToDo implements Serializable {
 
     private long sequence;
     private String description;
-    private String image;
 
     // Relationships
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -49,14 +48,6 @@ public class StepToDo implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     private HowToDo getHowtodo() {
