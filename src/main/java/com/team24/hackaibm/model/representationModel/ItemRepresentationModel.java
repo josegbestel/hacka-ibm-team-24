@@ -79,7 +79,12 @@ public class ItemRepresentationModel implements Serializable {
         item.setPrice(domain.getPrice());
         item.setImage(domain.getImage());
         item.setCreated(domain.getCreated());
-        item.setSeller(SellerRepresentationModel.byDomain(domain.getSeller()));
+
+        SellerRepresentationModel seller = new SellerRepresentationModel();
+        seller.setName(domain.getSellerName());
+        seller.setLocation(domain.getSellerLocation());
+        seller.setContact(domain.getSellerContact());
+        item.setSeller(seller);
 
         return item;
     }

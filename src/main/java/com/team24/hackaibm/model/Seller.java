@@ -25,8 +25,8 @@ public class Seller implements Serializable {
     private String contact;
 
     //Relationships
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Item> items;
+//    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Item> items;
 
     public long getId() {
         return id;

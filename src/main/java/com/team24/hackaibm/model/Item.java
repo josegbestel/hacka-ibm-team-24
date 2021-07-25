@@ -25,14 +25,18 @@ public class Item implements Serializable {
     private String image;
     private String created;
 
+    private String sellerName;
+    private String sellerContact;
+    private String sellerLocation;
+
     //Relationships
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "seller_id", nullable = false)
-    private Seller seller;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "seller_id", nullable = false)
+//    private Seller seller;
 
     public long getId() {
         return id;
@@ -82,6 +86,30 @@ public class Item implements Serializable {
         this.created = created;
     }
 
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getSellerContact() {
+        return sellerContact;
+    }
+
+    public void setSellerContact(String sellerContact) {
+        this.sellerContact = sellerContact;
+    }
+
+    public String getSellerLocation() {
+        return sellerLocation;
+    }
+
+    public void setSellerLocation(String sellerLocation) {
+        this.sellerLocation = sellerLocation;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -90,11 +118,11 @@ public class Item implements Serializable {
         this.product = product;
     }
 
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
+//    public Seller getSeller() {
+//        return seller;
+//    }
+//
+//    public void setSeller(Seller seller) {
+//        this.seller = seller;
+//    }
 }

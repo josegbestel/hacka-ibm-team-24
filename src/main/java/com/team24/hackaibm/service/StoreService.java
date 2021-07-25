@@ -36,15 +36,15 @@ public class StoreService {
 
         Seller seller = null;
 
-        if(optSeller.isPresent()){
-            seller = optSeller.get();
-        }else{
-            Seller domain = newItem.getSeller().toDomain();
-            seller = sellerRepository.save(domain);
-        }
+//        if(optSeller.isPresent()){
+//            seller = optSeller.get();
+//        }else{
+//            Seller domain = newItem.getSeller().toDomain();
+//            seller = sellerRepository.save(domain);
+//        }
 
         if(optProduct.isPresent()){
-            Item item = newItem.toDomain(optProduct.get(), seller);
+            Item item = newItem.toDomain(optProduct.get());
             item = itemRepository.save(item);
 
             NewItemRepresentationModel created = NewItemRepresentationModel.byDomain(item);

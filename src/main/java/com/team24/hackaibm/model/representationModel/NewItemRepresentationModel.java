@@ -74,7 +74,7 @@ public class NewItemRepresentationModel implements Serializable {
         this.productId = productId;
     }
 
-    public Item toDomain(Product product, Seller seller){
+    public Item toDomain(Product product){
         Item domain = new Item();
 
         domain.setTitle(this.title);
@@ -83,7 +83,10 @@ public class NewItemRepresentationModel implements Serializable {
         domain.setImage(this.image);
         domain.setCreated(CustomDate.byLocalDate(LocalDate.now()).toString());
 
-        domain.setSeller(seller);
+        domain.setSellerName(this.getSeller().getName());
+        domain.setSellerLocation(this.getSeller().getLocation());
+        domain.setSellerContact(this.getSeller().getContact())
+        ;
         domain.setProduct(product);
 
         return domain;
@@ -96,8 +99,13 @@ public class NewItemRepresentationModel implements Serializable {
         item.setPrice(domain.getPrice());
         item.setImage(domain.getImage());
         item.setCreated(domain.getCreated());
-        item.setSeller(SellerRepresentationModel.byDomain(domain.getSeller()));
         item.setProductId(domain.getProduct().getId());
+
+        SellerRepresentationModel seller = new SellerRepresentationModel();
+        seller.setName(domain.getSellerName());
+        seller.setLocation(domain.getSellerLocation());
+        seller.setContact(domain.getSellerContact());
+        item.setSeller(seller);
 
         return item;
     }
