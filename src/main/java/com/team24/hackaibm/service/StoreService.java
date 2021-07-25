@@ -2,7 +2,6 @@ package com.team24.hackaibm.service;
 
 import com.team24.hackaibm.model.Item;
 import com.team24.hackaibm.model.Product;
-import com.team24.hackaibm.model.Seller;
 import com.team24.hackaibm.model.enums.ProductCategory;
 import com.team24.hackaibm.model.representationModel.ItemRepresentationModel;
 import com.team24.hackaibm.model.representationModel.NewItemRepresentationModel;
@@ -10,7 +9,6 @@ import com.team24.hackaibm.model.representationModel.StoreItemRepresentationMode
 import com.team24.hackaibm.model.representationModel.StoreRepresentationModel;
 import com.team24.hackaibm.repository.ItemRepository;
 import com.team24.hackaibm.repository.ProductRepository;
-import com.team24.hackaibm.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,24 +22,18 @@ public class StoreService {
     ItemRepository itemRepository;
 
     @Autowired
-    SellerRepository sellerRepository;
-
-    @Autowired
     ProductRepository productRepository;
 
     //CREATE
     public NewItemRepresentationModel create(NewItemRepresentationModel newItem){
         Optional<Product> optProduct = productRepository.findById(newItem.getProductId());
-        Optional<Seller> optSeller = sellerRepository.findByContact(newItem.getSeller().getContact());
 
-        Seller seller = null;
+        Optional<Item> optItem = itemRepository.findByTitleAndSellerContact(newItem.getTitle(), newItem.getSeller().getContact());
 
-//        if(optSeller.isPresent()){
-//            seller = optSeller.get();
-//        }else{
-//            Seller domain = newItem.getSeller().toDomain();
-//            seller = sellerRepository.save(domain);
-//        }
+        if(optItem.isPresent()){
+            NewItemRepresentationModel created = NewItemRepresentationModel.byDomain(optItem.get());
+            return created;
+        }
 
         if(optProduct.isPresent()){
             Item item = newItem.toDomain(optProduct.get());

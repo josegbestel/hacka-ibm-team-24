@@ -1,7 +1,5 @@
 package com.team24.hackaibm.model.representationModel;
 
-import com.team24.hackaibm.model.Seller;
-
 import java.io.Serializable;
 
 public class SellerRepresentationModel implements Serializable {
@@ -40,25 +38,5 @@ public class SellerRepresentationModel implements Serializable {
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public Seller toDomain() {
-        Seller seller = new Seller();
-        seller.setContact(this.contact);
-        seller.setName(this.name);
-        seller.setLocation(this.location);
-
-        return seller;
-    }
-
-
-
-    public static SellerRepresentationModel byDomain(Seller seller) {
-        SellerRepresentationModel rep = new SellerRepresentationModel();
-        rep.setName(seller.getName());
-        rep.setContact(seller.getContact());
-        rep.setLocation(seller.getContact());
-
-        return rep;
     }
 }

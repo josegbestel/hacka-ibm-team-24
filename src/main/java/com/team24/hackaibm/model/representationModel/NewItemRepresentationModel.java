@@ -2,7 +2,6 @@ package com.team24.hackaibm.model.representationModel;
 
 import com.team24.hackaibm.model.Item;
 import com.team24.hackaibm.model.Product;
-import com.team24.hackaibm.model.Seller;
 import com.team24.hackaibm.utils.CustomDate;
 
 import java.io.Serializable;
