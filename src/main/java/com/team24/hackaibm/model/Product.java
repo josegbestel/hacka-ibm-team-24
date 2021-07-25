@@ -6,6 +6,7 @@ import com.team24.hackaibm.model.enums.ProductCategory;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,10 +23,14 @@ public class Product implements Serializable {
 
     private String title;
     private String image;
+    private String info;
 
     // Relationships
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<HowToDo> howtodo;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private ProductCategory category;
@@ -56,6 +61,14 @@ public class Product implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public List<HowToDo> getHowtodo() {

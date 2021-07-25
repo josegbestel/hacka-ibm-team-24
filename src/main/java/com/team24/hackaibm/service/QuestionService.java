@@ -4,6 +4,7 @@ import com.team24.hackaibm.model.HowToDo;
 import com.team24.hackaibm.model.Product;
 import com.team24.hackaibm.model.Question;
 import com.team24.hackaibm.model.StepToDo;
+import com.team24.hackaibm.model.representationModel.QuestionsRepresentationModel;
 import com.team24.hackaibm.repository.HowToDoRepository;
 import com.team24.hackaibm.repository.ProductRepository;
 import com.team24.hackaibm.repository.QuestionRepository;
@@ -30,7 +31,7 @@ public class QuestionService {
     StepToDoRepository stepToDoRepository;
 
     //CREATE
-    public List<Question> create(List<Question> questions){
+    public QuestionsRepresentationModel create(List<Question> questions){
         List<Question> createds = new ArrayList<>();
         for(Question question : questions){
             List<Product> products = question.getProducts();
@@ -60,11 +61,15 @@ public class QuestionService {
             }
             createds.add(question);
         }
-        return createds;
+        QuestionsRepresentationModel questionsRep = new QuestionsRepresentationModel();
+        questionsRep.setQuestions(createds);
+        return questionsRep;
     }
 
     //GET ALL
-    public List<Question> getAll(){
-        return questionRepository.findAll();
+    public QuestionsRepresentationModel getAll(){
+        QuestionsRepresentationModel questions = new QuestionsRepresentationModel();
+        questions.setQuestions(questionRepository.findAll());
+        return questions;
     }
 }
